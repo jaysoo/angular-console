@@ -43,6 +43,7 @@ import { BuildStatusComponent } from './build-status/build-status.component';
 import { CommandOutputComponent } from './command-output/command-output.component';
 import { TestStatusComponent } from './test-status/test-status.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SankeyComponent } from './sankey/sankey.component';
 
 const IMPORTS = [
   HttpClientModule,
@@ -106,7 +107,8 @@ const PUBLIC_DECLARATIONS = [
   TaskRunnerComponent,
   TaskSelectorComponent,
   TerminalComponent,
-  TestStatusComponent
+  TestStatusComponent,
+  SankeyComponent
 ];
 
 @NgModule({
