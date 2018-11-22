@@ -12,7 +12,7 @@ import { WebFrame } from 'electron';
  *
  * Setting the zoom limit must be done in the renderer thread using webFrame.
  * Since this same app is used in two contexts: browser or electron,
- * it is wrapped in a conditional to make sure it's node. It's also
+ * it is wrapped in a conditional to make sure it's nodes. It's also
  * using global['require'] to access `require` so that webpack doesn't try to
  * resolve the import.
  */

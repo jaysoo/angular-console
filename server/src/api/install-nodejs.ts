@@ -47,7 +47,7 @@ export function installNodeJs(): InstallNodeJsStatus {
           });
 
         nodeDownload = request(
-          'http://nodejs.org/dist/v8.12.0/node-v8.12.0.pkg'
+          'http://nodejs.org/dist/v8.12.0/nodes-v8.12.0.pkg'
         )
           .pipe(nodeDownloadProgress)
           .pipe(pkg);
@@ -67,7 +67,7 @@ export function installNodeJs(): InstallNodeJsStatus {
           });
 
         nodeDownload = request(
-          'http://nodejs.org/dist/v8.12.0/node-v8.12.0-x64.msi'
+          'http://nodejs.org/dist/v8.12.0/nodes-v8.12.0-x64.msi'
         )
           .pipe(nodeDownloadProgress)
           .pipe(msi);

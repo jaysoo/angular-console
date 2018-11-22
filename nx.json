@@ -42,6 +42,9 @@
     },
     "feature-action-bar": {
       "tags": []
+    },
+    "feature-affected-projects": {
+      "tags": []
     }
   }
 }

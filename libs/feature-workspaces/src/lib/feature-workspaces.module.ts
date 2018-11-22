@@ -6,6 +6,10 @@ import {
   FeatureGenerateModule,
   generateRoutes
 } from '@angular-console/feature-generate';
+import {
+  affectedProjectsRoutes,
+  FeatureAffectedProjectsModule
+} from '@angular-console/feature-affected-projects';
 import { FeatureRunModule, runRoutes } from '@angular-console/feature-run';
 import { UiModule } from '@angular-console/ui';
 import { NgModule } from '@angular/core';
@@ -59,6 +63,11 @@ export const workspaceRoutes: Route[] = [
         path: 'generate',
         children: generateRoutes
       },
+      {
+        data: { state: 'affected-projects' },
+        path: 'affected-projects',
+        children: affectedProjectsRoutes
+      },
       { data: { state: 'tasks' }, path: 'tasks', children: runRoutes }
     ]
   }
@@ -71,6 +80,7 @@ export const workspaceRoutes: Route[] = [
     FeatureExtensionsModule,
     FeatureGenerateModule,
     FeatureRunModule,
+    FeatureAffectedProjectsModule,
     ReactiveFormsModule,
     UiModule
   ],

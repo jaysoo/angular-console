@@ -1,0 +1,44 @@
+.sankey-diagram-container {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  svg {
+    font-size: 9px;
+    display: block;
+    margin-top: 10px;
+  }
+
+  .nodes rect {
+    fill-opacity: 0.6;
+    shape-rendering: crispEdges;
+  }
+
+  .node {
+    stroke-width: 2;
+    stroke-opacity: 0.5;
+  }
+
+  .node:hover {
+    fill-opacity: 1 !important;
+    stroke-opacity: 1 !important;
+
+    text {
+      opacity: 1 !important;
+    }
+  }
+
+  .nodes text {
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
+  }
+
+  .link {
+    fill: none;
+    stroke-opacity: 0.2;
+  }
+
+  .link:hover {
+    stroke-opacity: 0.6 !important;
+  }
+}

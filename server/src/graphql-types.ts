@@ -69,6 +69,7 @@ export interface Workspace {
   projects?: (Project | null)[] | null;
   docs: Docs;
   completions?: CompletionsTypes | null;
+  depGraph?: AffectedDepGraph | null;
 }
 
 export interface Dependencies {
@@ -160,6 +161,10 @@ export interface CompletionsTypes {
 export interface CompletionResultType {
   value: string;
   display?: string | null;
+}
+
+export interface AffectedDepGraph {
+  json: string;
 }
 
 export interface EditorSupport {
@@ -274,6 +279,10 @@ export interface NpmScriptsWorkspaceArgs {
 }
 export interface ProjectsWorkspaceArgs {
   name?: string | null;
+}
+export interface DepGraphWorkspaceArgs {
+  base: string;
+  head?: string | null;
 }
 export interface SchematicsSchematicCollectionArgs {
   name?: string | null;
@@ -564,6 +573,7 @@ export namespace WorkspaceResolvers {
     projects?: ProjectsResolver<(Project | null)[] | null, any, Context>;
     docs?: DocsResolver<Docs, any, Context>;
     completions?: CompletionsResolver<CompletionsTypes | null, any, Context>;
+    depGraph?: DepGraphResolver<AffectedDepGraph | null, any, Context>;
   }
 
   export type NameResolver<R = string, Parent = any, Context = any> = Resolver<
@@ -623,6 +633,15 @@ export namespace WorkspaceResolvers {
     Parent = any,
     Context = any
   > = Resolver<R, Parent, Context>;
+  export type DepGraphResolver<
+    R = AffectedDepGraph | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context, DepGraphArgs>;
+  export interface DepGraphArgs {
+    base: string;
+    head?: string | null;
+  }
 }
 
 export namespace DependenciesResolvers {
@@ -1047,6 +1066,18 @@ export namespace CompletionResultTypeResolvers {
     Parent = any,
     Context = any
   > = Resolver<R, Parent, Context>;
+}
+
+export namespace AffectedDepGraphResolvers {
+  export interface Resolvers<Context = any> {
+    json?: JsonResolver<string, any, Context>;
+  }
+
+  export type JsonResolver<R = string, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >;
 }
 
 export namespace EditorSupportResolvers {

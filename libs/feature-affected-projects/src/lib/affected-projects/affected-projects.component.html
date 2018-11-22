@@ -1,0 +1,44 @@
+<ng-container *ngIf="(depGraph$ | async) as depGraph; else: loading">
+  <div class="header" fxLayout>
+    <div fxFlex>
+      <input
+        placeholder="Filter projects"
+        type="text"
+        [formControl]="projectCtrl"
+        [matAutocomplete]="auto"
+      />
+
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of (filteredOptions$ | async)"
+          [value]="option"
+          >{{ option }}</mat-option
+        >
+      </mat-autocomplete>
+    </div>
+    <div>
+      <button
+        mat-stroked-button
+        (click)="testSelected()"
+        [disabled]="!route.snapshot.params.project"
+      >
+        Test selected
+      </button>
+      <button mat-stroked-button color="primary" (click)="testAffected()">
+        Test affected
+      </button>
+    </div>
+  </div>
+  <angular-console-sankey-diagram
+    [selected]="project$ | async"
+    [data]="depGraph"
+    [filter]="projectFilter$ | async"
+    (nodeSelected)="onNodeSelected($event)"
+  ></angular-console-sankey-diagram>
+</ng-container>
+
+<ng-template #loading>
+  <div fxLayout="row" fxLayoutAlign="center center" fxFill>
+    <mat-spinner diameter="48"> </mat-spinner>
+  </div>
+</ng-template>

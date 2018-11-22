@@ -39,16 +39,15 @@ import {
   cacheFiles,
   directoryExists,
   exists,
-  fileExistsSync,
   files,
   filterByName,
   findClosestNg,
   findExecutable,
   readJsonFile
 } from '../utils';
-import { CommandInformation } from '../api/commands';
 import { mainWindow } from '..';
 import { docs } from '../api/docs';
+import { readAffectedDepGraph } from '../api/read-affected-dep-graph';
 
 const SchematicCollection: SchematicCollectionResolvers.Resolvers = {
   schematics(collection: any, args: any) {
@@ -98,6 +97,14 @@ const Workspace: WorkspaceResolvers.Resolvers = {
   },
   docs(workspace: any) {
     return workspace;
+  },
+  async depGraph(workspace: any, args: any) {
+    const json: any = await readAffectedDepGraph(
+      workspace.path,
+      args.base,
+      args.head
+    );
+    return { json };
   }
 };
 
@@ -309,7 +316,7 @@ const Mutation: MutationResolvers.Resolvers = {
         findClosestNg(args.path),
         [
           'generate',
-          ...args.genCommand,
+          ...(args.genCommand as string[]),
           ...dryRun,
           ...disableInteractivePrompts(args.path)
         ],

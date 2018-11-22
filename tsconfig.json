@@ -60,6 +60,9 @@
       ],
       "@angular-console/feature-settings": [
         "libs/feature-settings/src/index.ts"
+      ],
+      "@angular-console/feature-affected-projects": [
+        "libs/feature-affected-projects/src/index.ts"
       ]
     }
   },

@@ -1,0 +1,17 @@
+:host {
+  padding: 24px;
+
+  .header button {
+    margin-left: 9px;
+  }
+}
+
+input {
+  background: none;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+  height: 100%;
+  width: 300px;
+}

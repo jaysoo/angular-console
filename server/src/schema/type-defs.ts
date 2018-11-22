@@ -240,6 +240,7 @@ export const typeDefs = gql`
     projects(name: String): [Project]
     docs: Docs!
     completions: CompletionsTypes
+    depGraph(base: String!, head: String): AffectedDepGraph
   }
 
   type Docs {
@@ -255,5 +256,9 @@ export const typeDefs = gql`
     prop: String
     description: String
     id: String!
+  }
+  
+  type AffectedDepGraph {
+    json: String!
   }
 `;

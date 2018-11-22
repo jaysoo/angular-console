@@ -373,6 +373,34 @@
           }
         }
       }
+    },
+    "feature-affected-projects": {
+      "root": "libs/feature-affected-projects",
+      "sourceRoot": "libs/feature-affected-projects/src",
+      "projectType": "library",
+      "prefix": "angular-console",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-affected-projects/tsconfig.lib.json",
+              "libs/feature-affected-projects/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-affected-projects/src/test.ts",
+            "tsConfig": "libs/feature-affected-projects/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-affected-projects/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "cli": {
