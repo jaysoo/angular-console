@@ -70,6 +70,7 @@ export interface Workspace {
   docs: Docs;
   completions?: CompletionsTypes | null;
   depGraph?: AffectedDepGraph | null;
+  gitBranches?: (string | null)[] | null;
 }
 
 export interface Dependencies {
@@ -574,6 +575,7 @@ export namespace WorkspaceResolvers {
     docs?: DocsResolver<Docs, any, Context>;
     completions?: CompletionsResolver<CompletionsTypes | null, any, Context>;
     depGraph?: DepGraphResolver<AffectedDepGraph | null, any, Context>;
+    gitBranches?: GitBranchesResolver<(string | null)[] | null, any, Context>;
   }
 
   export type NameResolver<R = string, Parent = any, Context = any> = Resolver<
@@ -642,6 +644,12 @@ export namespace WorkspaceResolvers {
     base: string;
     head?: string | null;
   }
+
+  export type GitBranchesResolver<
+    R = (string | null)[] | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>;
 }
 
 export namespace DependenciesResolvers {

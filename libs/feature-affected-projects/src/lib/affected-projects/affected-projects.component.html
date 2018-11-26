@@ -1,22 +1,44 @@
 <ng-container *ngIf="(depGraph$ | async) as depGraph; else: loading">
-  <div class="header" fxLayout>
-    <div fxFlex>
-      <input
-        placeholder="Filter projects"
-        type="text"
-        [formControl]="projectCtrl"
-        [matAutocomplete]="auto"
-      />
-
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let option of (filteredOptions$ | async)"
-          [value]="option"
-          >{{ option }}</mat-option
+  <div class="header" fxLayout fxLayoutGap="20px">
+    <div fxFlex fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-select [formControl]="branchCtrl" placeholder="Base branch">
+          <mat-option
+            *ngFor="let option of (gitBranches$ | async)"
+            [value]="option"
+            >{{ option }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="form-field-wide">
+        <input
+          matInput
+          placeholder="Filter projects"
+          type="text"
+          [formControl]="filterCtrl"
+          [matAutocomplete]="projectsAutocomplete"
+        />
+        <button
+          mat-button
+          *ngIf="filterCtrl.value"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="filterCtrl.setValue('')"
         >
-      </mat-autocomplete>
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint align="start">Show projects matching the filter.</mat-hint>
+        <mat-autocomplete #projectsAutocomplete="matAutocomplete">
+          <mat-option
+            *ngFor="let option of (filteredProjects$ | async)"
+            [value]="option"
+            >{{ option }}</mat-option
+          >
+        </mat-autocomplete>
+      </mat-form-field>
     </div>
-    <div>
+    <div fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="10px">
       <button
         mat-stroked-button
         (click)="testSelected()"
@@ -24,17 +46,27 @@
       >
         Test selected
       </button>
-      <button mat-stroked-button color="primary" (click)="testAffected()">
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="testAffected()"
+        [disabled]="depGraph?.criticalPath.length === 0"
+      >
         Test affected
       </button>
     </div>
   </div>
-  <angular-console-sankey-diagram
-    [selected]="project$ | async"
-    [data]="depGraph"
-    [filter]="projectFilter$ | async"
-    (nodeSelected)="onNodeSelected($event)"
-  ></angular-console-sankey-diagram>
+  <div class="content">
+    <div *ngIf="(pendingRequest$ | async)" class="pending">
+      <ng-container *ngTemplateOutlet="loading"></ng-container>
+    </div>
+    <angular-console-sankey-diagram
+      [selected]="project$ | async"
+      [data]="depGraph"
+      [filter]="filterCtrl.value"
+      (nodeSelected)="onNodeSelected($event)"
+    ></angular-console-sankey-diagram>
+  </div>
 </ng-container>
 
 <ng-template #loading>

@@ -1,17 +1,21 @@
 :host {
-  padding: 24px;
-
-  .header button {
-    margin-left: 9px;
-  }
+  padding: 18px 24px;
 }
 
-input {
-  background: none;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid #ccc;
-  font-size: 16px;
-  height: 100%;
+.content {
+  position: relative;
+  margin-top: 10px;
+}
+
+.pending {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.6);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.form-field-wide {
   width: 300px;
 }

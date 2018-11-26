@@ -241,6 +241,7 @@ export const typeDefs = gql`
     docs: Docs!
     completions: CompletionsTypes
     depGraph(base: String!, head: String): AffectedDepGraph
+    gitBranches: [String]
   }
 
   type Docs {

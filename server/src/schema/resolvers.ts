@@ -48,6 +48,7 @@ import {
 import { mainWindow } from '..';
 import { docs } from '../api/docs';
 import { readAffectedDepGraph } from '../api/read-affected-dep-graph';
+import { readGitBranches } from '../api/read-git-branches';
 
 const SchematicCollection: SchematicCollectionResolvers.Resolvers = {
   schematics(collection: any, args: any) {
@@ -105,6 +106,9 @@ const Workspace: WorkspaceResolvers.Resolvers = {
       args.head
     );
     return { json };
+  },
+  gitBranches(workspace: any) {
+    return readGitBranches(workspace.path);
   }
 };
 

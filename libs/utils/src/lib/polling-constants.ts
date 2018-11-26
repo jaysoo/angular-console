@@ -5,3 +5,5 @@ export const PROJECTS_POLLING = 5000;
 export const TARGET_POLLING = 5000;
 export const SCHEMATICS_POLLING = 5000;
 export const EXTENSIONS_POLLING = 5000;
+export const GIT_POLLING = 1000;
+export const DEP_GRAPH_POLLING = 5000;

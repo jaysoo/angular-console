@@ -64,7 +64,7 @@ export class WorkspaceComponent implements OnDestroy {
 
       const url = firstChild.url[0].path;
 
-      const route = this.routes.find(r => url.indexOf(r.url) > -1);
+      const route = this.routes.find(r => r.url === url);
       if (!route) {
         throw new Error('This should never happen');
       }
@@ -76,7 +76,7 @@ export class WorkspaceComponent implements OnDestroy {
 
   readonly routes: Array<Route> = [
     { icon: 'view_list', url: 'projects', title: 'Projects' },
-    { icon: 'timeline', url: 'affected-projects', title: 'Affected Projects' },
+    { icon: 'show_chart', url: 'affected-projects', title: 'Affected Projects' },
     { icon: 'code', url: 'generate', title: 'Generate Code' },
     { svgIcon: 'console', url: 'tasks', title: 'Run Tasks' },
     {

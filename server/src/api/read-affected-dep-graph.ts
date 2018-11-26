@@ -19,7 +19,9 @@ export async function readAffectedDepGraph(
 
   return new Promise((res, rej) => {
     const filePath = join(tmp, 'affected-graph.json');
-    const angularJSON = require(join(cwd, 'angular.json'));
+    const angularJSON = JSON.parse(
+      readFileSync(join(cwd, 'angular.json')).toString()
+    );
     const cmd = `${cwd}/node_modules/.bin/nx`;
     const args = ['affected:dep-graph', `--file=${filePath}`, `--base=${base}`];
     if (head) {
